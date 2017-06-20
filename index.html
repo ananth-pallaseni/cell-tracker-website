@@ -31,42 +31,8 @@
 
 </head>
 
-<body id="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<body id="page-top"  data-target=".navbar-fixed-top">
 
-    <!-- Navigation -->
-    <nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-                    Menu <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand page-scroll" href="#page-top">
-                 <span class="light">HOME</span> 
-                </a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-                <ul class="nav navbar-nav">
-                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-                    <li class="hidden">
-                        <a href="#page-top"></a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#about">Summary</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#download">Segmentation</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="#contact">Analysis</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
-    </nav>
 
     <!-- Intro Header -->
     <header id='header' class="intro">
@@ -103,15 +69,24 @@
                 <h2 class='sub-headers'>About Microscopy Stacks</h2>
                 <div class='row' >
                 <div class='col-lg-6'>
-                    <img class='side-img' src="img/seg_back_raw.png">
+                    <img class='side-img' src="img/stack_intro_tall.svg">
                 </div>
                 <div class='col-lg-6'>
-                    <h4 class='sub-sub-headers'>A quick introduction to microscopy stacks.</h5> 
+                    <h4 class='left-aligned '>A quick introduction to microscopy stacks.</h5> 
                     <ul class="list-group left-aligned">
                       <li class="list-group-item">All data from this project comes from <b>4d</b> microscope images of the bone marrow in a mouse's skull.</li>
                       <li class="list-group-item"><b>2d</b> images are taken at varying depths in the marrow to get a <b>3d</b> snapshot (and creating a "stack" of 2d images).</li>
                       <li class="list-group-item">This is repeated at regular intervals to get "stacks" for each time step.</li>
                     </ul> 
+
+                    <!-- <ol class="list-group left-aligned ">
+                      <li class="list-group-item ordered-list-item"> All data from this project comes from <b>4d</b> microscope images of the bone marrow in a mouse's skull. </li>
+
+                      <li class="list-group-item ordered-list-item"> <b>2d</b> images are taken at varying depths in the marrow to get a <b>3d</b> snapshot (and creating a "stack" of 2d images).</li>
+
+                      <li class="list-group-item ordered-list-item">This is repeated at regular intervals to get "stacks" for each time step. </li>
+                                            
+                    </ol>  -->
                 </div>
 
 
@@ -142,11 +117,83 @@
                 <h2 class='sub-headers'>Preprocessing</h2>
                 <div class='row' >
                 <div class='col-lg-6'>
-                    <p>Grayscale is a free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, simply download the template on <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
+                    <!-- <video class='side-img'>
+                        <source src="raw_img_movie.mp4" type="video/mp4">
+                        <source src="raw_img_movie.webm" type="video/webm">
+                    </video> -->
+                    <!-- <img class='side-img' src="img/raw_img_movie.gif"> -->
+
+                    <div id="preprocess-carousel" class="carousel slide" data-ride="carousel" data-interval="false">
+                      <div class="carousel-inner" role="listbox">
+                        <div class="item active">
+                          <img class="d-block img-responsive center-block " src="img/raw_img_movie.gif" >
+                        </div>
+                        <div class="item">
+                          <img class="d-block img-responsive center-block " src="img/subback_img_movie.gif" >
+                        </div>
+                        <div class="item">
+                          <img class="d-block img-responsive center-block " src="img/subback_medblur_movie.gif" >
+                        </div>
+                        <div class="item">
+                          <img class="d-block img-responsive center-block " src="img/subback_medblur_timeavg_movie.gif" >
+                        </div>
+                        <div class="item">
+                          <img class="d-block img-responsive center-block " src="img/subback_medblur_timeavg_thresh_movie.gif" >
+                        </div>
+                      </div>
+                      <a class="left carousel-control carousel-control-custom" href="#preprocess-carousel" role="button" data-slide="prev">
+                          <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control carousel-control-custom" href="#preprocess-carousel" role="button" data-slide="next">
+                          <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    </div>
+
                 </div>
                 <div class='col-lg-6'>
-                    <p>This theme features stock photos by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Maps skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                    <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with LESS files for easy customization.</p>
+                    <p class='left-aligned'>The stack initially undergoes some basic preprocessing to reduce the noise and threshold the image for further analysis.</p>
+                    <ol class="list-group left-aligned ">
+
+                        <button type="button" class="list-group-item list-group-item-action ordered-list-item" onclick="$('#preprocess-carousel').carousel(1)" data-toggle="button">
+                            <b>Background Subtraction.</b> <br> 
+                            Creates an approximation to the "background" of the stack and then removes it. Based on <a href="https://imagej.net/Rolling_Ball_Background_Subtraction">this</a> ImageJ plugin.</button>
+
+                        <button type="button" class="list-group-item list-group-item-action ordered-list-item" onclick="$('#preprocess-carousel').carousel(2)">
+                            <b>Median Blur.</b> <br> 
+                            Blurs the image so that each pixel is the median of the pixels around it. Gets rid of salt-and-pepper noise.
+                        </button>
+
+                        <button type="button" class="list-group-item list-group-item-action ordered-list-item" onclick="$('#preprocess-carousel').carousel(3)">
+                            <b>Subtract Time Average.</b> <br>
+                            Sums each frame of the stack across time and then divides by the number of time steps. This creates a frame that is bright where pixels are repeatedly present and dull elsewhere. Subtracting this new frame from each frame in the original stack suppresses structures that are constant and allows through structures that move across their lifetime.
+                        </button>
+
+                        <button type="button" class="list-group-item list-group-item-action ordered-list-item" onclick="$('#preprocess-carousel').carousel(4)">
+                            <b>Threshold.</b> <br> 
+                            Thresholds all frames in the stack to create a binary image. 
+                        </button>
+
+
+
+
+
+
+
+                      <!-- <li class="list-group-item ordered-list-item"> <b>Background Subtraction.</b> <br> 
+                      Creates an approximation to the "background" of the stack and then removes it. Based on <a href="https://imagej.net/Rolling_Ball_Background_Subtraction">this</a> ImageJ plugin. </li>
+
+                      <li class="list-group-item ordered-list-item"> <b>Median Blur.</b> <br> 
+                      Blurs the image so that each pixel is the median of the pixels around it. Gets rid of salt-and-pepper noise. </li>
+
+                      <li class="list-group-item ordered-list-item"> <b>Subtract Time Average.</b> <br>
+                      Sums each frame of the stack across time and then divides by the number of time steps. This creates a frame that is bright where pixels are repeatedly present and dull elsewhere. Subtracting this new frame from each frame in the original stack suppresses structures that are constant and allows through structures that move across their lifetime. </li>
+
+                      <li class="list-group-item ordered-list-item"> <b>Threshold.</b> <br> 
+                      Thresholds all frames in the stack to create a binary image. </li> -->
+
+                      
+                    </ol> 
+                    
                 </div>
 
                 </div>
@@ -168,12 +215,16 @@
                 </a>
                 <h2 class='sub-headers'>Finding Blobs</h2>
                 <div class='row' >
-                <div class='col-lg-6'>
-                    <p>Grayscale is a free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, simply download the template on <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
+                <div class='col-lg-3' class='bordered'>
+                    <img src="img/sort5_thresh_0.png" class='side-img'>
+                </div>
+                <div class='col-lg-3'>
+                    <div id='cell_vis' class='center-block'></div>
                 </div>
                 <div class='col-lg-6'>
-                    <p>This theme features stock photos by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Maps skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                    <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with LESS files for easy customization.</p>
+                    <p class="left-aligned">Given a binary stack, this step connects adjacent bright pixels to form blobs. </p>
+                    <p class="left-aligned">The algorithm connects pixels in each individual xy frame, then combines blobs that are above and below each other in the z-direction. 
+                    </p>
                 </div>
 
                 </div>
@@ -198,11 +249,16 @@
                 <h2 class='sub-headers'>Filtering Shapes</h2>
                 <div class='row' >
                 <div class='col-lg-6'>
-                    <p>Grayscale is a free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, simply download the template on <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
+                    <img class='side-img' src="img/seg_back_raw.png">
                 </div>
                 <div class='col-lg-6'>
-                    <p>This theme features stock photos by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Maps skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                    <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with LESS files for easy customization.</p>
+                    <p class="left-aligned">Given a set of blobs, this step then filters them based on their morphological charactersitics.</p>
+                    <ol class="list-group left-aligned ">
+                      <li class="list-group-item ordered-list-item"> <b>Title.</b> <br> 
+                      Texttextext</li>
+
+                                            
+                    </ol> 
                 </div>
 
                 </div>
@@ -226,11 +282,22 @@
                 <h2 class='sub-headers'>Tracking</h2>
                 <div class='row' >
                 <div class='col-lg-6'>
-                    <p>Grayscale is a free Bootstrap 3 theme created by Start Bootstrap. It can be yours right now, simply download the template on <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
+                    <img class='side-img' src="img/seg_back_raw.png">
                 </div>
                 <div class='col-lg-6'>
-                    <p>This theme features stock photos by <a href="http://gratisography.com/">Gratisography</a> along with a custom Google Maps skin courtesy of <a href="http://snazzymaps.com/">Snazzy Maps</a>.</p>
-                    <p>Grayscale includes full HTML, CSS, and custom JavaScript files along with LESS files for easy customization.</p>
+                    <p class="left-aligned">Filtered blobs are tracked across time. </p>
+                    
+                    <ol class="list-group left-aligned ">
+                      <li class="list-group-item ordered-list-item"> <b>Match Blobs</b> <br>
+                      For a blob at time <i>t</i> at position <i>p</i>, the next blob in the sequence is the closest blob in time <i>t+1</i> which is within a given radius of <i>p</i>. </li>
+
+                      <li class="list-group-item ordered-list-item"> <b>Remove Duplicates</b> <br>
+                      The tracks are processed so that each blob only appears in one track. If a blob appears in multiple tracks, then it is assigned to the track where its distance to its predecessor is lowest. The other tracks are broken. </li>
+
+                      <li class="list-group-item ordered-list-item"><b>Filter Tracks</b> <br>
+                      Finally, tracks lasting less than 20 timesteps and tracks where blobs show a minimum of movement across their lifetime are removed. </li>
+                                            
+                    </ol> 
                 </div>
 
                 </div>
@@ -279,9 +346,6 @@
         </div>
     </section>
 
-    <!-- Map Section -->
-    <div id="map"></div>
-
     <!-- Footer -->
     <footer>
         <div class="container text-center">
@@ -302,7 +366,11 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
 
     <!-- Theme JavaScript -->
-    <script src="js/grayscale.min.js"></script>
+    <script src="js/grayscale.js"></script>
+
+    <script type="text/javascript" src='vendor/vis/dist/vis.js'></script>
+
+    <script type="text/javascript" src='js/cell_vis.js'></script>
 
 </body>
 

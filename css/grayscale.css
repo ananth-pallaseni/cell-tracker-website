@@ -223,6 +223,7 @@ a:focus {
 }
 .content-section {
   padding-top: 100px;
+  width: 100%;
 }
 .download-section {
   width: 100%;
@@ -242,8 +243,8 @@ a:focus {
 }
 @media (min-width: 767px) {
   .content-section {
-    padding-top: 250px;
-    padding-bottom: 250px;
+    padding-top: 150px;
+    padding-bottom: 150px;
   }
   .download-section {
     padding: 100px 0;
@@ -348,11 +349,22 @@ hr {
   text-align: left;
 }
 
-.side-img {
+.side-img,
+.side-img-border {
   max-height: 90%;
   max-width: 90%;
   border-color: #fff;
   border-width: 5px;
+}
+
+.side-img-border {
+  border: 1px solid;
+  border-color: #3CC994;
+}
+
+.bordered {
+  border: 1px solid;
+  border-color: #3CC994;
 }
 
 .list-group-item {
@@ -363,6 +375,40 @@ hr {
   font-size: 18px;
 }
 
+button.list-group-item {
+  padding: 10px 10px;
+  font-size: 16px;
+  border: 1px solid #fff;
+  margin: 5px 0px;
+  color: white;
+}
+
+button.list-group-item:hover {
+  background-color: #777;
+  color: white;
+}
+
 .row {
   padding-bottom: 10px;
+}
+
+.ordered-list-item {
+  /*display: list-item;*/
+  padding: 10px 10px;
+  font-size: 16px;
+  border: 1px solid #fff;
+  margin: 5px 0px;
+  color: white;
+
+}
+
+.ordered-list-item:hover {
+  /*display: list-item;*/
+  background-color: #777;
+  
+}
+
+.carousel-control.carousel-control-custom {
+  background-image: none;
+  background-color: transparent;
 }
