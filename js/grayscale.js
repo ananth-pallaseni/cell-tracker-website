@@ -26,7 +26,7 @@ function appendNavbar() {
                         <a  class="page-scroll" href="summary.html">Summary</a>
                     </li>
                     <li id="segmentation-nav-btn">
-                        <a  class="page-scroll" href="#about">Segmentation</a>
+                        <a  class="page-scroll" href="segmentation.html">Segmentation</a>
                     </li>
                     <li id="analysis-nav-btn">
                         <a  class="page-scroll" href="analysis.html">Analysis</a>

@@ -412,3 +412,28 @@ button.list-group-item:hover {
   background-image: none;
   background-color: transparent;
 }
+
+/*.tab-content {
+  background-color: #333;
+}*/
+
+.nav-pills.nav-justified > li.active > a {
+  vertical-align: center;
+  /*background-color: #3CC994;*/
+  background-color: #333;
+  /*color: #3CC994;*/
+}
+
+.tab-content {
+  background-color: #333;
+}
+
+.tight {
+  margin: 0;
+}
+
+
+.summary-txt {
+  font-size: 20pt;
+  
+}
