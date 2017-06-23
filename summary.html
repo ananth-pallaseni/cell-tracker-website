@@ -55,7 +55,7 @@
         <div class="row">
 
             
-            <div class="col-lg-10 col-lg-offset-1">
+            <div class="col-lg-8 col-lg-offset-2">
 
                 <!-- Centered Pills -->
                 <ul class="nav nav-pills nav-justified">
@@ -69,19 +69,14 @@
 
                 <div class="tab-content clearfix">
                     <div class="tab-pane active" id='lay_summary'>
-                        <p class="left-aligned summary-txt">plebplebplebplebplebplebplebplebplebplebplebpleb</p>
-                        <p class="left-aligned summary-txt">
-                        - Why are HSCs important? <br>
-                        - What do we not know about them -> why study morphology. Highlight that morphological analysis in unique <br>
-                        - What is microscopy and why does it relate to the above goal. <br>
-                        - 
-                        - Intravital microscopy to look at heamatopoetic stem cells (HSC) in 3d is an upcoming research area. <br>
-                        - This imaging is important to understanding how HSC's interact in their niche and thus how these stem cells function. <br>
-                        - There already exist tools to perform automatic image analysis of this data in 3d, but these methods are too slow? to apply to images that vary across time.
-                        - As a result, in order to study the  </p>
+                        <p class="left-aligned summary-txt"> 
+                            A stem cell is able to transform into many types of cell and serve essential functions in body repair. A Hematopoietic Stem Cell (HSC) is a type of stem cell that is found in the bone marrow and can differentiate into both red and white blood cells. Understanding the behaviour of these stem cells in their environment is important in the study of blood diseases. An area that has not been looked at much is how the shape of the HSCs varies as they go about their interactions. Recently, work has been done that takes images of the bone marrow at different depths to get a 3d look at what is inside and this technique is beign used to analyse the bahaviour of the HSCs. Segmentation is the process of identifying the various structures in microscope images and extracting relevant data (eg: position, or shape). There are tools to perform segmentation but they suffer from not being able to use 3d data or link 3d data across time (to track cells as they move). This project creates a tool to perform segmentation in 3d and across time and then uses the data this extracts to analyse the shape of HSCs.
+                            </p>
+
                     </div>
                     <div class="tab-pane" id='slay_summary'>
-                        <h2 class="left-aligned">sciencesciencescience</h2>
+                        <p class="left-aligned summary-txt"> 
+                            Hematopoietic Stem Cells (HSCs) are responsible for regenerating the supply of all types of blood cells required for healthy function via their ability to differentiate and self-renew. HSCs are found primarily in the red bone marrow, inside a highly specialised niche which regulates their function. <a href="references.html#ref2">[2, 3]</a> The study of HSCs and the niche they occupy is of extreme importance in the understanding and treatment of hematological disease. A particular area that has seen little examination is the characterization of HSC morphology as they move about and interact in their environment. A look at the shape and location of HSCs would shed light on this poorly understood area. To this end, intravital microscopy has proven a very promising technique to enable viewing of HSCs in vivo, allowing unique perspectives on their interactions within the niche <a href="references.html#ref4">[4, 5]</a>. However, processing of microscopy data can be very time consuming to do manually and although techniques exist to perform automatic segmentation of structures these suffer from being restricted to two dimensions <a href="references.html#ref6">[6]</a> or from not taking into account the time variance of the segmented cells <a href="references.html#ref7">[7]</a>. In particular, morphological analysis would benefit greatly from automatic segmentation in 3d and tracking across time of HSCs. This project brings these issues together and develops a segmentation technique in 4d and uses it to take a look at the morphological behaviour of HSCs in the bone marrow niche. </p>
                     </div>
                 </div>
                 
@@ -90,6 +85,14 @@
             
         </div>
     </section>
+
+
+    <!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <h6>Ananth Pallaseni, 2017</h6>
+        </div>
+    </footer>
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.js"></script>

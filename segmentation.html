@@ -63,35 +63,42 @@
                     <i class="fa fa-angle-double-up animated"></i>
                 </a>
 
-                <h2 class='sub-headers'>Motivation</h2>
-                <p class='left-aligned'>/todo blah blah blah 3d is novel</p>
+                <!-- <h2 class='sub-headers'>Motivation</h2>
+                <p class='left-aligned'>Intravital microscopy is a very promising method of studying HSCs in their native environment. The acquisiton of images in 3d and across time allows the examination of the shape and movement of the cells as they interact in the niche.  The images for this project are extracted from mouse calvarium bone marrow</p> -->
 
-                <h2 class='sub-headers'>About Microscopy Stacks</h2>
                 <div class='row' >
-                <div class='col-lg-6'>
-                    <img class='side-img' src="img/stack_intro_tall.svg">
-                </div>
-                <div class='col-lg-6'>
-                    <h4 class='left-aligned '>A quick introduction to microscopy stacks.</h5> 
-                    <ul class="list-group left-aligned">
-                      <li class="list-group-item">All data from this project comes from <b>4d</b> microscope images of the bone marrow in a mouse's skull.</li>
-                      <li class="list-group-item"><b>2d</b> images are taken at varying depths in the marrow to get a <b>3d</b> snapshot (and creating a "stack" of 2d images).</li>
-                      <li class="list-group-item">This is repeated at regular intervals to get "stacks" for each time step.</li>
-                    </ul> 
+                    <div class='col-lg-6'>
+                        <h4 class='left-aligned '>Motivation</h4> 
+                        <p class='left-aligned'>Intravital microscopy is a very promising method of studying HSCs in their native environment. The acquisiton of images in 3d and across time allows the examination of the shape and movement of the cells as they interact in the niche.  The images for this project are extracted from mouse calvarium bone marrow</p>
+                        <h4 class='sub-headers'>Pipeline Summary</h4>
+                        <p class='left-aligned tight'>The pipeline follows four stages: preprocessing, blob finding, blob filtering and tracking.  </p>   
+                        <ul class="list-group left-aligned">
+                          <li class="list-group-item ordered-list-item">Preprocessing tries to remove noise and threshold the images.</li>
+                          <li class="list-group-item ordered-list-item">Blob finding identifies all conencted components in a stack and forms blobs in 3d.</li>
+                          <li class="list-group-item ordered-list-item">Blob filtering removes all blobs that are morphologically unsuitable (and therefore unlikely to be HSCs)</li>
+                          <li class="list-group-item ordered-list-item">Tracking identifies blobs across time and forms tracks. </li>
+                        </ul> 
+                    </div>
 
-                    <!-- <ol class="list-group left-aligned ">
-                      <li class="list-group-item ordered-list-item"> All data from this project comes from <b>4d</b> microscope images of the bone marrow in a mouse's skull. </li>
-
-                      <li class="list-group-item ordered-list-item"> <b>2d</b> images are taken at varying depths in the marrow to get a <b>3d</b> snapshot (and creating a "stack" of 2d images).</li>
-
-                      <li class="list-group-item ordered-list-item">This is repeated at regular intervals to get "stacks" for each time step. </li>
-                                            
-                    </ol>  -->
+                    <div class='col-lg-6 tall'>
+                        <img class='side-img' src="img/Sort-6-pos-2.gif">
+                    </div>
                 </div>
 
-
-
-                </div>
+                <!-- <h2 class='sub-headers'>About Microscopy Stacks</h2> -->
+                <div class='row' >
+                    <div class='col-lg-6'>
+                        <img class='side-img' src="img/stack_intro_tall.svg">
+                    </div>
+                    <div class='col-lg-6'>
+                        <h4 class='left-aligned '>A quick introduction to microscopy stacks.</h4> 
+                        <ul class="list-group left-aligned">
+                          <li class="list-group-item">All data from this project comes from <b>4d</b> microscope images of the bone marrow in a mouse's skull.</li>
+                          <li class="list-group-item"><b>2d</b> images are taken at varying depths in the marrow to get a <b>3d</b> snapshot (and creating a "stack" of 2d images).</li>
+                          <li class="list-group-item">This is repeated at regular intervals to get "stacks" for each time step.</li>
+                        </ul> 
+                    </div>
+                </div> 
                 
                 <!-- Button for moving to next section -->
                 <a href="#preprocess" class="btn btn-circle page-scroll bookend-nav-btn">
@@ -154,7 +161,7 @@
                     <p class='left-aligned'>The stack initially undergoes some basic preprocessing to reduce the noise and threshold the image for further analysis.</p>
                     <ol class="list-group left-aligned ">
 
-                        <button type="button" class="list-group-item list-group-item-action ordered-list-item" onclick="$('#preprocess-carousel').carousel(1)" data-toggle="button">
+                        <button type="button" class="list-group-item list-group-item-action  ordered-list-item" onclick="$('#preprocess-carousel').carousel(1)" data-toggle="button">
                             <b>Background Subtraction.</b> <br> 
                             Creates an approximation to the "background" of the stack and then removes it. Based on <a href="https://imagej.net/Rolling_Ball_Background_Subtraction">this</a> ImageJ plugin.</button>
 
@@ -172,25 +179,6 @@
                             <b>Threshold.</b> <br> 
                             Thresholds all frames in the stack to create a binary image. 
                         </button>
-
-
-
-
-
-
-
-                      <!-- <li class="list-group-item ordered-list-item"> <b>Background Subtraction.</b> <br> 
-                      Creates an approximation to the "background" of the stack and then removes it. Based on <a href="https://imagej.net/Rolling_Ball_Background_Subtraction">this</a> ImageJ plugin. </li>
-
-                      <li class="list-group-item ordered-list-item"> <b>Median Blur.</b> <br> 
-                      Blurs the image so that each pixel is the median of the pixels around it. Gets rid of salt-and-pepper noise. </li>
-
-                      <li class="list-group-item ordered-list-item"> <b>Subtract Time Average.</b> <br>
-                      Sums each frame of the stack across time and then divides by the number of time steps. This creates a frame that is bright where pixels are repeatedly present and dull elsewhere. Subtracting this new frame from each frame in the original stack suppresses structures that are constant and allows through structures that move across their lifetime. </li>
-
-                      <li class="list-group-item ordered-list-item"> <b>Threshold.</b> <br> 
-                      Thresholds all frames in the stack to create a binary image. </li> -->
-
                       
                     </ol> 
                     
@@ -349,7 +337,7 @@
     <!-- Footer -->
     <footer>
         <div class="container text-center">
-            <p>Copyright &copy; Your Website 2016</p>
+            <h6>Ananth Pallaseni, 2017</h6>
         </div>
     </footer>
 

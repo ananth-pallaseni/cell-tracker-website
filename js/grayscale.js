@@ -31,6 +31,9 @@ function appendNavbar() {
                     <li id="analysis-nav-btn">
                         <a  class="page-scroll" href="analysis.html">Analysis</a>
                     </li>
+                    <li id="reference-nav-btn">
+                        <a  class="page-scroll" href="references.html">References</a>
+                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -43,13 +46,16 @@ function appendNavbar() {
 
     var title = $(document).attr('title');
     if (title == 'Segmentation') {
-        $('#segmentation-nav-btn').addClass('active');
+        $('#segmentation-nav-btn').addClass('active').children().attr('href', '#page-top');
     }
     else if (title == 'Summary') {
-        $('#summary-nav-btn').addClass('active');
+        $('#summary-nav-btn').addClass('active').children().attr('href', '#page-top');
     }
-    else if (title = 'Analysis') {
-        $('#analysis-nav-btn').addClass('active');
+    else if (title == 'Analysis') {
+        $('#analysis-nav-btn').addClass('active').children().attr('href', '#page-top');
+    }
+    else if (title == 'References') {
+        $('#reference-nav-btn').addClass('active').children().attr('href', '#page-top');
     }
 }
 
@@ -83,3 +89,11 @@ $('.navbar-collapse ul li a').click(function() {
     $(".navbar-collapse").collapse('hide');
 });
 
+
+// Makes all columns inside a row the same height
+(function() {
+    $(function() {
+        $('[class*="col-"]').matchHeight();
+    });
+    console.log('qqqqqqq')
+})();

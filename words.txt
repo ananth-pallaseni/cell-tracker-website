@@ -1,0 +1,21 @@
+- Why are HSCs important? <br>
+- What do we not know about them -> why study morphology. Highlight that morphological analysis in unique <br>
+- What is microscopy and why does it relate to the above goal. <br>
+- 
+- Intravital microscopy to look at heamatopoetic stem cells (HSC) in 3d is an upcoming research area. <br>
+- This imaging is important to understanding how HSC's interact in their niche and thus how these stem cells function. <br>
+- There already exist tools to perform automatic image analysis of this data in 3d, but these methods are too slow? to apply to images that vary across time.
+- As a result, in order to study the  </p>
+
+
+
+
+
+
+
+Hematopoietic Stem Cells (HSCs) are responsible for regenerating the supply of all types of blood cells required for healthy function via their ability to differentiate and self-renew. HSCs are found primarily in the red bone marrow, inside a highly specialised niche which regulates their function. [2, 3] The study of HSCs and the niche they occupy is of extreme importance in the understanding and treatment of hematological disease. A particular area that has seen little examination is the characterization of HSC morphology as they move about and interact in their environment. A look at the shape and location of HSCs would shed light on this poorly understood area. To this end, intravital microscopy has proven a very promising technique to enable viewing of HSCs in vivo, allowing unique perspectives on their interactions within the niche [4, 5]. However, processing of microscopy data can be very time consuming to do manually and although techniques exist to perform automatic segmentation of structures these suffer from being restricted to two dimensions [6] or from not taking into account the time variance of the segmented cells [7]. In particular, morphological analysis would benefit greatly from automatic segmentation in 3d and tracking across time of HSCs. This project seeks to bring these issues together and develop a segmentation technique in 4d to take a look at the morphological behaviour of HSCs in the bone marrow niche.  
+
+
+
+This project seeks to increase our understanding of this aspect of HSC behaviour through analysis of microscopy data from mouse models. <br>
+In rece
