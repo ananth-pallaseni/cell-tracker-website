@@ -14,7 +14,7 @@ function appendNavbar() {
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
                     Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">
+                <a class="navbar-brand page-scroll" href="index.html" id="home-nav-btn">
                  <span class="light">HOME</span> 
                 </a>
             </div>
@@ -22,14 +22,14 @@ function appendNavbar() {
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-right navbar-main-collapse">
                 <ul class="nav navbar-nav">
-                    <li id="summary-nav-btn">
-                        <a  class="page-scroll" href="summary.html">Summary</a>
-                    </li>
                     <li id="segmentation-nav-btn">
                         <a  class="page-scroll" href="segmentation.html">Segmentation</a>
                     </li>
                     <li id="analysis-nav-btn">
                         <a  class="page-scroll" href="analysis.html">Analysis</a>
+                    </li>
+                    <li id="discussion-nav-btn">
+                        <a  class="page-scroll" href="discussion.html">Discussion</a>
                     </li>
                     <li id="reference-nav-btn">
                         <a  class="page-scroll" href="references.html">References</a>
@@ -49,10 +49,13 @@ function appendNavbar() {
         $('#segmentation-nav-btn').addClass('active').children().attr('href', '#page-top');
     }
     else if (title == 'Summary') {
-        $('#summary-nav-btn').addClass('active').children().attr('href', '#page-top');
+        $('#home-nav-btn').addClass('active').attr('href', '#page-top');
     }
     else if (title == 'Analysis') {
         $('#analysis-nav-btn').addClass('active').children().attr('href', '#page-top');
+    }
+    else if (title == 'Discussion') {
+        $('#discussion-nav-btn').addClass('active').children().attr('href', '#page-top');
     }
     else if (title == 'References') {
         $('#reference-nav-btn').addClass('active').children().attr('href', '#page-top');

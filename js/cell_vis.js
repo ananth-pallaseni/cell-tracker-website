@@ -5,12 +5,18 @@ var cell0 = blob_sparse.map(function(q) { return {'z': q[0], 'y': q[1], 'x': q[2
 var container = document.getElementById('cell_vis');
 
 var options = {
-        cameraPosition: {horizontal: 0, vertical: 0.3, distance: 2},
         xMax: 200,
         xMin: 150,
         zMax: 7,
         zMin: 3,
         yMax: 220,
         yMin: 180,
+        width:  '100%',
+        height: '100%',
+        dotSizeRatio: 0.01,
+        showLegend: false,
+        cameraPosition: {horizontal: -0.5, vertical: 0.3, distance: 2.3},
 };
+
+
 graph = new vis.Graph3d(container, cell0, options);

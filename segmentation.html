@@ -33,6 +33,13 @@
 
 <body id="page-top"  data-target=".navbar-fixed-top">
 
+    <script type="text/javascript">
+        function toggle_active_btn(new_id) {
+            $('#' + new_id).toggleClass('active');
+        }
+        var curSelectedPre = 'btn-original'
+    </script>
+
 
     <!-- Intro Header -->
     <header id='header' class="intro">
@@ -68,9 +75,35 @@
 
                 <div class='row' >
                     <div class='col-md-6'>
+                        
                         <h4 class='left-aligned '>Motivation</h4> 
-                        <p class='left-aligned'>Intravital microscopy is a very promising method of studying HSCs in their native environment. The acquisiton of images in 3d and across time allows the examination of the shape and movement of the cells as they interact in the niche.  The images for this project are extracted from mouse calvarium bone marrow</p>
-                        <h4 class='sub-headers'>Pipeline Summary</h4>
+                        <p class='left-aligned'>Intravital microscopy is a very promising method of studying cells in their native environment, aquiring images in 3d and across time inside living subjects. Previous work has shown the use of this technique for viewing cell behaviour in vivo <a href="references.html#ref4">[4,5]</a>. Processing of this type of data can be very tedious when done by hand - seperating the structures of import from the background must often be done frame by frame - leading to a desire for automated tools for this purpose. Automatic segmentation for HSCs exist, but is often restricetd to two dimensions <a href="references.html#ref6">[6]</a> or does not take advantage of the extra information given by having 3d stacks across time <a href="references.html#ref7">[7]</a> (being restricted purely 3d data). This project creates a lightweight segmentation pipeline for HSCs that addresses these issues by taking into account the entirety of the 4d data. </p>   
+
+                          
+
+                        
+
+                    </div>
+
+                    <div class='col-md-6 tall vertical-align'>
+                        <img class='side-img center-block' src="img/Sort-6-pos-2.gif">
+                    </div>
+                </div>
+
+                <div class='row' >
+                    <div class='col-md-6'>
+                        <img class='side-img' src="img/stack_intro_tall.svg">
+                    </div>
+                    <div class='col-md-6'>
+                        <h4 class='left-aligned '>A quick introduction to microscopy stacks</h4> 
+                        <p class="left-aligned"> HSCs are found in the red bone marrow, inside a very complicated niche which regulates their function <a href="references.html#ref2">[2,3]</a>. The data for this project are microscopy images of the bone marrow from mice models <a href="references.html#reffffff">[qqqq]</a>. Two dimensional images are taken at varying depths inside the marrow to create a 3d snapshot (or "stack") of the marrow niche at that time. This is repeated at regular intervals, which creates a series of stacks across time and produces the 4d data that enables this pipeline. </p>
+                    </div>
+                </div> 
+
+                <div class='row' >
+                    <h4 class='sub-headers'>Pipeline Summary</h4>
+                    
+                    <div class='col-md-6'>
                         <p class='left-aligned tight'>The pipeline follows four stages: preprocessing, blob finding, blob filtering and tracking.  </p>   
                         <ul class="list-group left-aligned">
                           <li class="list-group-item ordered-list-item">Preprocessing tries to remove noise and threshold the images.</li>
@@ -79,24 +112,8 @@
                           <li class="list-group-item ordered-list-item">Tracking identifies blobs across time and forms tracks. </li>
                         </ul> 
                     </div>
-
-                    <div class='col-md-6 tall'>
-                        <img class='side-img' src="img/Sort-6-pos-2.gif">
-                    </div>
-                </div>
-
-                <!-- <h2 class='sub-headers'>About Microscopy Stacks</h2> -->
-                <div class='row' >
                     <div class='col-md-6'>
-                        <img class='side-img' src="img/stack_intro_tall.svg">
-                    </div>
-                    <div class='col-md-6'>
-                        <h4 class='left-aligned '>A quick introduction to microscopy stacks.</h4> 
-                        <ul class="list-group left-aligned">
-                          <li class="list-group-item">All data from this project comes from <b>4d</b> microscope images of the bone marrow in a mouse's skull.</li>
-                          <li class="list-group-item"><b>2d</b> images are taken at varying depths in the marrow to get a <b>3d</b> snapshot (and creating a "stack" of 2d images).</li>
-                          <li class="list-group-item">This is repeated at regular intervals to get "stacks" for each time step.</li>
-                        </ul> 
+                        <img class='side-img img-responsive center-block' src="img/collage.jpg" style="max-width: 90%; max-height: 70%;">
                     </div>
                 </div> 
                 
@@ -123,7 +140,7 @@
                 
                 <h2 class='sub-headers'>Preprocessing</h2>
                 <div class='row' >
-                <div class='col-md-6'>
+                <div class='col-md-6 vis-col'>
                     <!-- <video class='side-img'>
                         <source src="raw_img_movie.mp4" type="video/mp4">
                         <source src="raw_img_movie.webm" type="video/webm">
@@ -148,34 +165,37 @@
                           <img class="d-block img-responsive center-block " src="img/subback_medblur_timeavg_thresh_movie.gif" >
                         </div>
                       </div>
-                      <a class="left carousel-control carousel-control-custom" href="#preprocess-carousel" role="button" data-slide="prev">
+                      <!-- <a class="left carousel-control carousel-control-custom" href="#preprocess-carousel" role="button" data-slide="prev">
                           <span class="glyphicon glyphicon-chevron-left"></span>
                         </a>
                         <a class="right carousel-control carousel-control-custom" href="#preprocess-carousel" role="button" data-slide="next">
                           <span class="glyphicon glyphicon-chevron-right"></span>
-                        </a>
+                        </a> -->
                     </div>
 
                 </div>
                 <div class='col-md-6'>
-                    <p class='left-aligned'>The stack initially undergoes some basic preprocessing to reduce the noise and threshold the image for further analysis.</p>
+                    <p class='left-aligned'>The stack initially undergoes some basic preprocessing to reduce the noise and threshold the image for further analysis. Select a section below to view the image after performing all processes up to that point.</p>
                     <ol class="list-group left-aligned ">
 
-                        <button type="button" class="list-group-item list-group-item-action  ordered-list-item" onclick="$('#preprocess-carousel').carousel(1)" data-toggle="button">
-                            <b>Background Subtraction.</b> <br> 
-                            Creates an approximation to the "background" of the stack and then removes it. Based on <a href="https://imagej.net/Rolling_Ball_Background_Subtraction">this</a> ImageJ plugin.</button>
+                        <button type="button" class="list-group-item list-group-item-action  ordered-list-item active" onclick="toggle_active_btn(curSelectedPre); $('#preprocess-carousel').carousel(0); curSelectedPre = 'btn-original'; toggle_active_btn(curSelectedPre);"  id="btn-original">
+                            <b>Original Image</b> <br> </button>
 
-                        <button type="button" class="list-group-item list-group-item-action ordered-list-item" onclick="$('#preprocess-carousel').carousel(2)">
+                        <button type="button" class="list-group-item list-group-item-action  ordered-list-item" onclick="toggle_active_btn(curSelectedPre); $('#preprocess-carousel').carousel(1); curSelectedPre = 'btn-bgsub'; toggle_active_btn(curSelectedPre);" id="btn-bgsub">
+                            <b>Background Subtraction.</b> <br> 
+                            Creates an approximation to the "background" of the stack and then removes it. Approximates a rolling ball algorithm as in <a href="references.html#ref1">[1]</a>. Based on <a href="https://imagej.net/Rolling_Ball_Background_Subtraction">this</a> ImageJ plugin.</button>
+
+                        <button type="button" class="list-group-item list-group-item-action ordered-list-item" onclick="toggle_active_btn(curSelectedPre); $('#preprocess-carousel').carousel(2); curSelectedPre = 'btn-blur'; toggle_active_btn(curSelectedPre);" id="btn-blur">
                             <b>Median Blur.</b> <br> 
                             Blurs the image so that each pixel is the median of the pixels around it. Gets rid of salt-and-pepper noise.
                         </button>
 
-                        <button type="button" class="list-group-item list-group-item-action ordered-list-item" onclick="$('#preprocess-carousel').carousel(3)">
+                        <button type="button" class="list-group-item list-group-item-action ordered-list-item" onclick="toggle_active_btn(curSelectedPre); $('#preprocess-carousel').carousel(3); curSelectedPre = 'btn-timeavg'; toggle_active_btn(curSelectedPre);" id="btn-timeavg">
                             <b>Subtract Time Average.</b> <br>
                             Sums each frame of the stack across time and then divides by the number of time steps. This creates a frame that is bright where pixels are repeatedly present and dull elsewhere. Subtracting this new frame from each frame in the original stack suppresses structures that are constant and allows through structures that move across their lifetime.
                         </button>
 
-                        <button type="button" class="list-group-item list-group-item-action ordered-list-item" onclick="$('#preprocess-carousel').carousel(4)">
+                        <button type="button" class="list-group-item list-group-item-action ordered-list-item" onclick="toggle_active_btn(curSelectedPre); $('#preprocess-carousel').carousel(4); curSelectedPre = 'btn-thresh'; toggle_active_btn(curSelectedPre);" id="btn-thresh">
                             <b>Threshold.</b> <br> 
                             Thresholds all frames in the stack to create a binary image. 
                         </button>
@@ -203,17 +223,22 @@
                 </a>
                 <h2 class='sub-headers'>Finding Blobs</h2>
                 <div class='row' >
-                <div class='col-md-3' class='bordered'>
-                    <img src="img/sort5_thresh_0.png" class='side-img'>
-                </div>
-                <div class='col-md-3'>
-                    <div id='cell_vis' class='center-block'></div>
-                </div>
-                <div class='col-md-6'>
-                    <p class="left-aligned">Given a binary stack, this step connects adjacent bright pixels to form blobs. </p>
-                    <p class="left-aligned">The algorithm connects pixels in each individual xy frame, then combines blobs that are above and below each other in the z-direction. 
-                    </p>
-                </div>
+                    <div class='col-md-6'>
+                        <p class="left-aligned">Given a binary stack, this step connects adjacent bright pixels to form blobs. The interactive simulation to the right shows a 3d view of a cell that was obtained using this method. </p>
+                        <a  class="list-group-item list-group-item-action ordered-list-item" >
+                            For each xy slice of the stack, the algorithm connects pixels that are next to each other to create 2d blobs. 
+                        </a>
+                        <a  class="list-group-item list-group-item-action ordered-list-item" >
+                            These 2d blobs are then merged with other blobs that are "adjacent" to them in the z direction to create 3d blobs.
+                        </a>
+                    </div>
+
+                    <div class="col-md-6 tall vis-row" id='cell_vis' >
+                        <!-- <div class="row vis-row center-block" id='cell_vis'>
+                            bounding ellipse img
+                        </div> -->
+                    </div>
+                    
 
                 </div>
                 
@@ -240,14 +265,20 @@
                     <img class='side-img' src="img/seg_back_raw.png">
                 </div>
                 <div class='col-md-6'>
-                    <p class="left-aligned">Given a set of blobs, this step then filters them based on their morphological charactersitics.</p>
-                    <ol class="list-group left-aligned ">
-                      <li class="list-group-item ordered-list-item"> <b>Title.</b> <br> 
-                      Texttextext</li>
-
-                                            
-                    </ol> 
-                </div>
+                        <p class="left-aligned">Given a set of blobs, this step filters them based on their basic shape characteristics. Blobs that are too small or too large are caught in these filters and greatly reduce the number of spurious blobs left in the image.</p>
+                        <button type="button" class="list-group-item list-group-item-action ordered-list-item">
+                            <b>Volume</b><br>
+                            Blobs that are too small and those that are too large are filtered out. Acceptable blobs were between ~200 and ~9000 microns cubed.
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action ordered-list-item">
+                            <b>Area</b><br>
+                            Blobs with an area in the xy plane that is less than 25 square microns or those with an area greater than 750 square microns are removed.
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action ordered-list-item">
+                            <b>Depth</b><br>
+                            Blobs that stretch across more than 8 z-levels or exist only on one z-level are removed.
+                        </button>
+                    </div>
 
                 </div>
                 
@@ -269,15 +300,13 @@
 
                 <h2 class='sub-headers'>Tracking</h2>
                 <div class='row' >
+                
                 <div class='col-md-6'>
-                    <img class='side-img' src="img/seg_back_raw.png">
-                </div>
-                <div class='col-md-6'>
-                    <p class="left-aligned">Filtered blobs are tracked across time. </p>
+                    <p class="left-aligned">Filtered blobs are tracked across time. This also serves as the final filter, where tracks that are too small or that do not move enough are removed. </p>
                     
                     <ol class="list-group left-aligned ">
                       <li class="list-group-item ordered-list-item"> <b>Match Blobs</b> <br>
-                      For a blob at time <i>t</i> at position <i>p</i>, the next blob in the sequence is the closest blob in time <i>t+1</i> which is within a given radius of <i>p</i>. </li>
+                      For a blob at time <b>t</b> at position <b>p</b>, the next blob in the sequence is the closest blob in time <b>t+1</b> which is within a given radius of <b>p</b>. </li>
 
                       <li class="list-group-item ordered-list-item"> <b>Remove Duplicates</b> <br>
                       The tracks are processed so that each blob only appears in one track. If a blob appears in multiple tracks, then it is assigned to the track where its distance to its predecessor is lowest. The other tracks are broken. </li>
@@ -288,6 +317,10 @@
                     </ol> 
                 </div>
 
+                <div class='col-md-6'>
+                    <img class='side-img' src="img/seg_back_raw.png">
+                </div>
+
                 </div>
                 
 
@@ -295,8 +328,18 @@
         </div>
     </section>
 
+    <section class="container content-section text-center">
+        <!-- Button for moving to next section -->
+         <div class="container text-center" >
+            <a href="analysis.html" class="btn page-scroll bookend-nav-btn nav-next-section" style='border: solid 2px white; padding: 20px 20px;'>
+                <h4 class="tight">Next, morphological analysis of the segmented cells  <i class="fa fa-angle-double-right animated"></i>  </h4>
+            </a>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer>
+        
         <div class="container text-center">
             <h6>Ananth Pallaseni, 2017</h6>
         </div>
@@ -313,9 +356,6 @@
 
     <!-- Plugin JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
-
-    <!-- Google Maps API Key - Use your own API key to enable the map feature. More information on the Google Maps API can be found at https://developers.google.com/maps/ -->
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRngKslUGJTlibkQ3FkfTxj3Xss1UlZDA&sensor=false"></script>
 
     <!-- Theme JavaScript -->
     <script src="js/grayscale.js"></script>

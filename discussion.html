@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Discussion</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+
+    <!-- Theme CSS -->
+    <link href="css/grayscale.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body id="page-top"  data-target=".navbar-fixed-top">
+
+
+    <!-- Intro Header -->
+    <header id='header' class="intro">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10 col-md-offset-1">
+                        <h1 class="brand-heading">Discussion</h1>
+                        <a href="#segmentation" class="btn btn-circle page-scroll bookend-nav-btn">
+                            <i class="fa fa-angle-double-down animated"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="container content-section text-center" id="segmentation">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h1 class="sub-header left-aligned">Segmentation</h1>
+                <p class="left-aligned">The segmentation pipeline, as it stands, can successfully segment HSCs in image stacks that are not too noisy. The system is lightweight and speedy but it does, however, suffer from two major flaws: a large number of false positives, and a reliance on some manual tuning of parameters. <br><br>
+                <b> False Positives: </b> While the cells are succesfully detected, they are often accompanied by assorted detritus that the system picks up as viable cell candidates. It is quite apparent to the human eye that these are not cells, however the differentiating factor is not any straightforward measurement that I could find. I suspect that more work on integrating the time-varying aspect of the data could go some way to fixing this. <br><br>
+                <b> Manual Tuning:  </b> The system is still quite sensitive to the parameter values for things like filter thresholds and throws out more false positives or misses cells altogether if these are not tweaked manually. Possible solutions include some sort of machine learning approach on a larger dataset to create a set of robust parameter ranges, along with exploring techniques for filtering that are less dependent on hard coded parameters. <br><br>
+
+                Apart from the two flaws above, there are several other avenues that could be pursued to improve the system in general. What follows is a list of potential changes or improvements:</p>
+
+                <ul class="list-group left-aligned">
+                  <li class="list-group-item ordered-list-item">Consider histogram equalization <a href="references.html#ref9">[9]</a>, which is a technique for equalizing the lighting across frames and can be used to correct the bleaching of the images as time increases. Applying this technique before the current preprocessing module could yield some improvements in noise reduction and clarity.</li>
+                  <li class="list-group-item ordered-list-item">Explore more complex thresholds. At the moment, the images are binarized using a naive threshold with a parameter of 25. Anything pixels above this value are pushed to max, while anything below is pushed to zero. There are considerably more advanced thresholding techniques available that can provide a less parameter dependent result. An example of a more advanced algorithm would be Otsu's method for adaptive thresholding <a href="references.html#ref10">[10]</a></li>
+                  <li class="list-group-item ordered-list-item">Decision Tree classification of cells based on morphological characteristics. This technique has been explored in <a href="references.html#ref7">[7]</a> and could be extended to the current pipeline. This would be one way of creating robust parameters for filtering that could go towards solving the manual tuning problem. </li>
+                  <li class="list-group-item ordered-list-item">Related to the above, filtering of blobs is very naive, looking only at basic morphological charactersitics like volume and area. More complex shape features such as roundness, presence of protrusions or convexity could provide more distinguishing power and really leverage the information the system has available to it. </li>
+                </ul> 
+                
+            </div>
+        </div>
+        
+    </section>
+
+    <section class="container content-section text-center alt-back">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h1 class="sub-header left-aligned">Analysis</h1>
+                <p class="left-aligned">The analyses on Aspect Ratio and Polarity showed no correlations of teh type I was expecting; Aspect ratio did not correlate with speed and Polarity was not correlated to the direction as cell was moving in. This is interesting, as both of these were though to be fairly basic assumptions. These analyses are useful given our lack of knowledge about this niche and also feed back into the segmentation aspect of the project, as understanding how the cell behaves provides more criteria for filtering and segmentation. There are still many more aspects of HSC morphology that could be examined and a few are presented below.<br><br>
+
+                A work in progress that was not complete for this report was the quantification of HSCs into categories - such as round, amoeboid or elongated - based on morphological measures like roundness, aspect ratio and circularity. This could also benefit from the decision tree classifier mentioned above to generate thresholds for the shape classification. The goal would be to understand if the cell shows preference for certain shapes based on its speed or environment. <br><br>
+
+                Another avenue to explore is the presence of protrusions in the cell and the direction and length of these protrusions. This information would attempt to be correlated with characteristics like proximity to other cells or to niche components with the goal of understanding the causes behind this behaviour. <br><br>
+
+                </p>
+            </div>
+        </div>
+        
+    </section>
+
+    <section class="container content-section text-center">
+        <!-- Button for moving to next section -->
+         <div class="container text-center" >
+            <a href="references.html" class="btn page-scroll bookend-nav-btn nav-next-section" style='border: solid 2px white; padding: 20px 20px;'>
+                <h4 class="tight">References  <i class="fa fa-angle-double-right animated"></i>  </h4>
+            </a>
+        </div>
+    </section>
+
+<!-- Footer -->
+    <footer>
+        <div class="container text-center">
+            <h6>Ananth Pallaseni, 2017</h6>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="js/grayscale.js"></script>
+
+</body>
+
+</html>

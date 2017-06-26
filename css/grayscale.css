@@ -124,7 +124,7 @@ a:focus {
   padding: 100px 0;
   text-align: center;
   color: white;
-  background: url(../img/intro-bg.jpg) no-repeat bottom center scroll;
+  background: linear-gradient(rgba(255,255, 255, 0.1), rgba(0, 0, 0, 0.9)), url(../img/intro-bg.png) no-repeat bottom center scroll;
   background-color: black;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -248,8 +248,8 @@ a:focus {
 
 @media (min-width: 767px) {
   .content-section {
-    padding-top: 100px;
-    padding-bottom: 150px;
+    padding-top: 75px;
+    padding-bottom: 75px;
   }
   .download-section {
     padding: 100px 0;
@@ -361,6 +361,7 @@ hr {
   max-width: 90%;
   border-color: #fff;
   border-width: 5px;
+
 }
 
 .side-img-border {
@@ -381,7 +382,9 @@ hr {
   font-size: 18px;
 }
 
-button.list-group-item {
+button.list-group-item,
+a.list-group-item {
+  text-align: left;
   padding: 10px 10px;
   font-size: 16px;
   border: 1px solid #fff;
@@ -389,9 +392,18 @@ button.list-group-item {
   color: white;
 }
 
-button.list-group-item:hover {
+button.list-group-item:hover,
+a.list-group-item:hover {
   background-color: #777;
   color: white;
+}
+
+button.list-group-item.active,
+button.list-group-item.active:focus,
+button.list-group-item.active:hover {
+  background-color: #fff;
+  color: black;
+  border-color: white;
 }
 
 .row {
@@ -511,3 +523,26 @@ button.list-group-item:hover {
     padding-bottom: 99999px;
 }*/
 
+
+.carousel {
+  top: 50%;
+  transform: translateY(-50%);
+  bottom: initial;
+}
+
+.vertical-align {
+    display: flex;
+    align-items: center;
+}
+
+a.navbar-brand.active {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+a.nav-next-section {
+  color: white;
+}
+
+.nav-next-section:hover {
+  color: #3CC994;
+}
