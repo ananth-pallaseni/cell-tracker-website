@@ -102,7 +102,7 @@ var real_pts = blob_sparse.map(function(q) {
 
 var ellandReal = ell_pts.concat(real_pts);
 
-var all = ellAndAxes.concat(real_pts)
+var all = ellAndAxes.concat(real_pts);
 
 
 var wf_cont = document.getElementById('wf_container');
@@ -128,7 +128,7 @@ function toggle_active_btn(new_id) {
 }
 
 function wf_blob() {
-		toggle_active_btn(currentlySelected)
+		toggle_active_btn(currentlySelected);
         var prevCam = wf.getCameraPosition();
         var newOpts = {
                 width:  '100%',
@@ -138,18 +138,18 @@ function wf_blob() {
                 dotSizeRatio: 0.01,
                 showLegend: false,
                 cameraPosition: {horizontal: 1.0, vertical: 0.5, distance: 2.3}
-        }
-        wf.setData(real_pts)
+        };
+        wf.setData(real_pts);
         wf.setOptions(newOpts);
         wf.setCameraPosition(prevCam);
         wf.redraw();
         currentlySelected = 'wf-btn-cell';
-        toggle_active_btn(currentlySelected)	
+        toggle_active_btn(currentlySelected);
 }
 
 
 function wf_ellipse() {
-		toggle_active_btn(currentlySelected)
+		toggle_active_btn(currentlySelected);
         var prevCam = wf.getCameraPosition();
         var newOpts = {
                 width:  '100%',
@@ -159,7 +159,7 @@ function wf_ellipse() {
                 dotSizeRatio: 0.01,
                 showLegend: false,
                 cameraPosition: {horizontal: 1.0, vertical: 0.5, distance: 2.3}
-        }
+        };
         if (showAxes) {
                 wf.setData(ellAndAxes);
         }
@@ -170,12 +170,12 @@ function wf_ellipse() {
         wf.setCameraPosition(prevCam);
         wf.redraw();
         currentlySelected = 'wf-btn-ellipse';
-        toggle_active_btn(currentlySelected)
+        toggle_active_btn(currentlySelected);
 
 }
 
 function wf_both() {
-		toggle_active_btn(currentlySelected)
+		toggle_active_btn(currentlySelected);
         var prevCam = wf.getCameraPosition();
         var newOpts = {
                 width:  '100%',
@@ -185,7 +185,7 @@ function wf_both() {
                 dotSizeRatio: 0.005,
                 showLegend: false,
                 cameraPosition: {horizontal: 1.0, vertical: 0.5, distance: 2.3}
-        }
+        };
         if (showAxes) {
                 wf.setData(all);
         }
@@ -196,7 +196,7 @@ function wf_both() {
         wf.setCameraPosition(prevCam);
         wf.redraw();
         currentlySelected = 'wf-btn-both'
-        toggle_active_btn(currentlySelected)
+        toggle_active_btn(currentlySelected);
 }
 
 function wf_toggle_axes() {
@@ -213,10 +213,10 @@ function wf_toggle_axes() {
         }
         else if (currentlySelected == 'wf-btn-both') {
                 if (showAxes) {
-                        wf.setData(ellandReal)
+                        wf.setData(ellandReal);
                 }
                 else {
-                        wf.setData(all)
+                        wf.setData(all);
                 }
         }
 
@@ -224,19 +224,204 @@ function wf_toggle_axes() {
         showAxes = !showAxes;
         wf.redraw();
 
-        toggle_active_btn('wf-btn-axes')
+        toggle_active_btn('wf-btn-axes');
    
 }
 
 
+var polCont = document.getElementById('polarity-sim-container');
+
+var polOptions = {
+        cameraPosition: {horizontal: 0, vertical: 0.3, distance: 2},
+        xMax: 200,
+        xMin: 150,
+        zMax: 7,
+        zMin: 2,
+        yMax: 220,
+        yMin: 180,
+};
+
+polarity = new vis.Graph3d(polCont, ell_pts, polOptions);
+function polarity_ellipse() {
+        var prevCam = polarity.getCameraPosition();
+        var newOpts = {
+                width:  '100%',
+                height: '100%',
+                style: 'dot-color',
+                dataColor: '#ff0000',
+                dotSizeRatio: 0.005,
+                showLegend: false
+        };
+        polarity.setData(ell_pts);
+        polarity.setOptions(newOpts);
+        polarity.redraw();
+        polarity.setCameraPosition(prevCam);
+}
+
+function polarity_ellipse_and_axis() {
+        var doubleaxis = ticks_axis.concat(ticks_axis.map(q => -q))
+                .map(q => [0, 0, q*wf_radii[2]])
+                .map(q => dotmat(q, wf_rotation))
+                .map(q => [q[0] + wf_center[0] , q[1] + wf_center[1], q[2] + wf_center[2]])
+                .map(function(q) {return {'z': q[0], 'y': q[1], 'x': q[2], 'style': 0.9}});
+        var diraxis = ticks_axis.map(q => [0, 0, q*wf_radii[2]])
+                .map(q => [q[0] + wf_center[0] , q[1] + wf_center[1], q[2] + wf_center[2]])
+                .map(function(q) {return {'z': q[0], 'y': q[1], 'x': q[2], 'style': 0.5}});
+
+        var newdata = ell_pts.concat(doubleaxis).concat(diraxis);
+        var prevCam = polarity.getCameraPosition();
+        var newOpts = {
+                width:  '100%',
+                height: '100%',
+                style: 'dot-color',
+                dataColor: '#ff0000',
+                dotSizeRatio: 0.005,
+                showLegend: false
+        };
+        polarity.setData(newdata);
+        polarity.setOptions(newOpts);
+        polarity.redraw();
+        polarity.setCameraPosition(prevCam);
+}
+
+var projCont = document.getElementById('projection-container');
+
+var projOptions = {
+        cameraPosition: {horizontal: 0, vertical: 0.3, distance: 2},
+        xMax: 200,
+        xMin: 150,
+        zMax: 7,
+        zMin: 2,
+        yMax: 220,
+        yMin: 180,
+};
 
 
+var currProjBtn = 'proj-btn-cell';
+var projdata = blob_sparse.map(function(q) { return {'z': 4, 'y': q[1], 'x': q[2], 'style': 0.9 }; } );
+var projell = ell_pts.map(function(q) { return {'z': 4, 'y': q.y, 'x': q.x, 'style': q.style}; });
+var proj_xaxis = ticks_axis.map(q => [0, 0, q*wf_radii[2]]).map(q => dotmat(q, wf_rotation)).map(q => [q[0] + wf_center[0] , q[1] + wf_center[1], q[2] + wf_center[2]]);
+var proj_yaxis = ticks_axis.map(q => [0, q*wf_radii[1], 0]).map(q => dotmat(q, wf_rotation)).map(q => [q[0] + wf_center[0] , q[1] + wf_center[1], q[2] + wf_center[2]]);
+var proj_axes = proj_xaxis.concat(proj_yaxis).map(function(q) { return {'z': 4, 'y': q[1], 'x': q[2], 'style': 0.5 }; } );
+var proj = new vis.Graph3d(projCont, projdata, projOptions);
+var proj_toggle = false;
+function ap2d_proj() {
+        toggle_active_btn(currProjBtn);
+        var prevCam = proj.getCameraPosition();
+        var newOpts = {
+                width:  '100%',
+                height: '100%',
+                style: 'dot-size',
+                dataColor: '#ff0000',
+                dotSizeRatio: 0.005,
+                showLegend: false
+        };
+        proj.setData(projdata);
+        proj.setOptions(newOpts);
+        proj.redraw();
+        proj.setCameraPosition(prevCam);
+        currProjBtn = 'proj-btn-cell';
+        toggle_active_btn(currProjBtn);
+}
 
+function ap2d_ell() {
+        if (currProjBtn == 'proj-btn-ellipse') {
+                return;
+        }
+        toggle_active_btn(currProjBtn);
+        var prevCam = proj.getCameraPosition();
+        var newOpts = {
+                width:  '100%',
+                height: '100%',
+                style: 'dot-size',
+                dataColor: '#0000ff',
+                dotSizeRatio: 0.005,
+                showLegend: false
+        };
+        if (proj_toggle) {
+                proj.setData(projell.concat(proj_axes));
+                newOpts.style = 'dot-color';
+        }
+        else {
+           proj.setData(projell);     
+        }
+        
+        proj.setOptions(newOpts);
+        proj.redraw();
+        proj.setCameraPosition(prevCam);
+        currProjBtn = 'proj-btn-ellipse';
+        toggle_active_btn(currProjBtn);
+}
 
+function ap2d_both() {
+        if (currProjBtn == 'proj-btn-both') {
+                return;
+        }
+        toggle_active_btn(currProjBtn);
+        var prevCam = proj.getCameraPosition();
+        var newOpts = {
+                width:  '100%',
+                height: '100%',
+                style: 'dot-color',
+                dataColor: '#ff0000',
+                dotSizeRatio: 0.005,
+                showLegend: false
+        };
+        if (proj_toggle) {
+                proj.setData(projdata.concat(projell).concat(proj_axes));
+        }
+        else {
+             proj.setData(projdata.concat(projell));   
+        }
+        
+        proj.setOptions(newOpts);
+        proj.redraw();
+        proj.setCameraPosition(prevCam);
+        currProjBtn = 'proj-btn-both';
+        toggle_active_btn(currProjBtn);
+}
 
-
+function adp2d_toggle_axes() {
+        var newdata = []
+        if (currProjBtn == 'proj-btn-ellipse') {
+                if (proj_toggle) {
+                        newdata = projell;
+                }
+                else {
+                     newdata = projell.concat(proj_axes);   
+                }
+                
+        }
+        else if (currProjBtn == 'proj-btn-both') {
+                if (proj_toggle) {
+                        newdata = projdata.concat(projell)
+                }
+                else {
+                        newdata = projdata.concat(projell).concat(proj_axes);
+                }
+                
+        }
+        else {
+                return 
+        }
+        var prevCam = proj.getCameraPosition();
+        var newOpts = {
+                width:  '100%',
+                height: '100%',
+                style: 'dot-color',
+                dataColor: '#ff0000',
+                dotSizeRatio: 0.005,
+                showLegend: false
+        };
+        proj.setData(newdata);
+        proj.setOptions(newOpts);
+        proj.redraw();
+        proj.setCameraPosition(prevCam);
+        toggle_active_btn('proj-btn-axes');
+        proj_toggle = !proj_toggle;
+}
 
 wf_blob();
-
-
+polarity_ellipse_and_axis();
+ap2d_proj();
 
