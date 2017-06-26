@@ -348,7 +348,7 @@ hr {
 }
 
 .alt-back {
-  background-color: #333;
+  background-color: #222;
 }
 
 .left-aligned {
@@ -448,7 +448,7 @@ button.list-group-item:hover {
 @media (min-width: 768px) {
   .summary-txt {
     font-size: 16pt;
-    margin: 100px 250px ;
+    margin: 100px 200px ;
     text-align: justify;
   }
 }
@@ -463,7 +463,7 @@ button.list-group-item:hover {
 }
 
 .ctrl-row {
-  height: 20%;
+  height: 10%;
 }
 
 .ctrl-col {
@@ -471,7 +471,19 @@ button.list-group-item:hover {
 }
 
 .vis-row {
-  height: 80%;
+  height: 90%;
+}
+
+.vis-col {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media (min-width: 768px) {
+  .vis-col {
+    padding-left: 50px;
+  padding-right: 50px;
+  }
 }
 
 .ctrl-btn {
@@ -480,6 +492,14 @@ button.list-group-item:hover {
   color: #3CC994;
   border: 1pt white solid;
   background-color: transparent;
+  font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+
+.ctrl-btn.active, 
+.ctrl-btn:active {
+  background-color: #fff;
+  color: #000;
 }
 
 .row{
@@ -490,3 +510,4 @@ button.list-group-item:hover {
     margin-bottom: -99999px;
     padding-bottom: 99999px;
 }*/
+

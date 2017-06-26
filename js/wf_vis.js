@@ -82,7 +82,7 @@ for (var i = 0; i < x.length; i++) {
 var num_ticks_axis = 100;
 var ticks_axis = Array(num_ticks_axis);
 for (var i = 0; i < ticks_axis.length; i++) {
-        ticks_axis[i] = i / num_ticks_axis;
+        ticks_axis[i] = (i / num_ticks_axis) * 2;
 };
 var xaxis = ticks_axis.map(q => [0, 0, q*wf_radii[2]]).map(q => dotmat(q, wf_rotation)).map(q => [q[0] + wf_center[0] , q[1] + wf_center[1], q[2] + wf_center[2]]);
 var yaxis = ticks_axis.map(q => [0, q*wf_radii[1], 0]).map(q => dotmat(q, wf_rotation)).map(q => [q[0] + wf_center[0] , q[1] + wf_center[1], q[2] + wf_center[2]]);
@@ -119,10 +119,16 @@ var options = {
 
 wf = new vis.Graph3d(wf_cont, real_pts, options);
 
-var currentlySelected = 'blob';
+var currentlySelected = 'wf-btn-cell';
 var showAxes = false;
 
+
+function toggle_active_btn(new_id) {
+	$('#' + new_id).toggleClass('active');
+}
+
 function wf_blob() {
+		toggle_active_btn(currentlySelected)
         var prevCam = wf.getCameraPosition();
         var newOpts = {
                 width:  '100%',
@@ -137,11 +143,13 @@ function wf_blob() {
         wf.setOptions(newOpts);
         wf.setCameraPosition(prevCam);
         wf.redraw();
-        currentlySelected = 'blob';
+        currentlySelected = 'wf-btn-cell';
+        toggle_active_btn(currentlySelected)	
 }
 
 
 function wf_ellipse() {
+		toggle_active_btn(currentlySelected)
         var prevCam = wf.getCameraPosition();
         var newOpts = {
                 width:  '100%',
@@ -161,10 +169,13 @@ function wf_ellipse() {
         wf.setOptions(newOpts);
         wf.setCameraPosition(prevCam);
         wf.redraw();
-        currentlySelected = 'ellipse'
+        currentlySelected = 'wf-btn-ellipse';
+        toggle_active_btn(currentlySelected)
+
 }
 
 function wf_both() {
+		toggle_active_btn(currentlySelected)
         var prevCam = wf.getCameraPosition();
         var newOpts = {
                 width:  '100%',
@@ -184,14 +195,15 @@ function wf_both() {
         wf.setOptions(newOpts);
         wf.setCameraPosition(prevCam);
         wf.redraw();
-        currentlySelected = 'both'
+        currentlySelected = 'wf-btn-both'
+        toggle_active_btn(currentlySelected)
 }
 
 function wf_toggle_axes() {
         var prevCam = wf.getCameraPosition();
         wf.setCameraPosition(prevCam);
         
-        if(currentlySelected == 'ellipse') {
+        if(currentlySelected == 'wf-btn-ellipse') {
                 if (showAxes) {
                         wf.setData(ell_pts);
                 }
@@ -199,7 +211,7 @@ function wf_toggle_axes() {
                         wf.setData(ellAndAxes);
                 }
         }
-        else if (currentlySelected == 'both') {
+        else if (currentlySelected == 'wf-btn-both') {
                 if (showAxes) {
                         wf.setData(ellandReal)
                 }
@@ -211,6 +223,20 @@ function wf_toggle_axes() {
 
         showAxes = !showAxes;
         wf.redraw();
+
+        toggle_active_btn('wf-btn-axes')
+   
 }
 
+
+
+
+
+
+
+
+
 wf_blob();
+
+
+
